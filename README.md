@@ -19,11 +19,15 @@ var params = {
 // The model defines what will be the object returned by validParams. The value
 // of the key is a function that takes an argument representing the parameters
 // to valid. This function should extract the required parameter(s) from it,
-// transform it/them (if needed) and return the value.
+// transform it/them (if needed) and return the value. If it only needs to take
+// the literal value from the params object, just assign the name of the the
+// key.
 var model  = {
-  firstName:   function(params) { return params.firstName; },
-  lastName:    function(params) { return params.lastName; },
-  phoneNumber: function(params) { return params.phoneNumber.replace(/\D/g, ""); }
+  firstName:   'firstName',
+  lastName:    'lastName',
+  phoneNumber: function(params) {
+    return params.phoneNumber.replace(/\D/g, "");
+  }
 };
 
 validParams(params, model);
