@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>valid-params by magicienap</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/magicienap/valid-params">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/magicienap/valid-params/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/magicienap/valid-params/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>valid-params</h1>
+          <p>Extract values from an object and return them with some transformations.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/magicienap">magicienap</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a name="valid-params" class="anchor" href="#valid-params"><span class="octicon octicon-link"></span></a>valid-params</h1>
+
+<p>This library is used to extract values from an objet and return them with some
+transformations. It can be used to valid the parameters received from a web
+application.</p>
+
+<h1>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">validParams</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'valid-params'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">firstName</span><span class="o">:</span>   <span class="s2">"Antoine"</span><span class="p">,</span>
+  <span class="nx">lastName</span><span class="o">:</span>    <span class="s2">"Proulx"</span><span class="p">,</span>
+  <span class="nx">phoneNumber</span><span class="o">:</span> <span class="s2">"123 456-7890"</span><span class="p">,</span>
+  <span class="nx">admin</span><span class="o">:</span>       <span class="kc">true</span>
+<span class="p">};</span>
+
+<span class="c1">// The model defines what will be the object returned by validParams. The value</span>
+<span class="c1">// of the key is a function that takes an argument representing the parameters</span>
+<span class="c1">// to valid. This function should extract the required parameter(s) from it,</span>
+<span class="c1">// transform it/them (if needed) and return the value. If it only needs to take</span>
+<span class="c1">// the literal value from the params object, just assign the name of the the</span>
+<span class="c1">// key.</span>
+<span class="kd">var</span> <span class="nx">model</span>  <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">firstName</span><span class="o">:</span>   <span class="s1">'firstName'</span><span class="p">,</span>
+  <span class="nx">lastName</span><span class="o">:</span>    <span class="s1">'lastName'</span><span class="p">,</span>
+  <span class="nx">phoneNumber</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">params</span><span class="p">.</span><span class="nx">phoneNumber</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\D/g</span><span class="p">,</span> <span class="s2">""</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">validParams</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="nx">model</span><span class="p">);</span>
+<span class="c1">// Result</span>
+<span class="c1">// { firstName: "Antoine", lastName: "Proulx", phoneNumber: "1234567890" }</span>
+</pre></div>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
